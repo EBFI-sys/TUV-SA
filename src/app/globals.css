@@ -18,8 +18,8 @@
   --color-line: #dbe2eb;
   --color-line-dark: rgb(143 191 255 / 0.16);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), var(--font-plex), ui-sans-serif, sans-serif;
   --font-mono: var(--font-jbmono), ui-monospace, "SF Mono", Menlo, monospace;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -62,6 +62,21 @@
   .btn-ghost-dark:hover { border-color: #fff; }
   .btn .arrow { transition: transform .25s var(--ease-out-expo); }
   .btn:hover .arrow { transform: translateX(3px); }
+
+  .btn-outline { border: 1px solid var(--color-line); color: var(--color-text); background: #fff; }
+  .btn-outline:hover { border-color: var(--color-tuv); color: var(--color-tuv); }
+  .glass { background: rgb(6 26 51 / 0.78); backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2); }
+  .field {
+    width: 100%; height: 3rem; padding-inline: 0.875rem; border: 1px solid var(--color-line); border-radius: 2px; background: #fff;
+    font-size: 0.9375rem; color: var(--color-text); transition: border-color .15s;
+  }
+  .field::placeholder { color: #7b8aa0; }
+  .field:focus { outline: none; border-color: var(--color-tuv); box-shadow: 0 0 0 3px rgb(0 55 119 / 0.12); }
+  .field-dark { background: rgb(6 26 51 / 0.35); border-color: rgb(255 255 255 / 0.28); color: #fff; }
+  .field-dark::placeholder { color: rgb(255 255 255 / 0.7); }
+  .field-dark:focus { border-color: #fff; box-shadow: 0 0 0 3px rgb(255 255 255 / 0.15); }
+  .label { display: block; margin-bottom: 0.5rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
 
   .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 100; background: #fff; color: var(--color-ink); padding: .75rem 1rem; }
   .skip-link:focus { top: 1rem; }
