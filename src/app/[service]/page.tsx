@@ -4,7 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ServiceAccordion from "@/components/ServiceAccordion";
 import ServiceQuoteCard from "@/components/ServiceQuoteCard";
-import { Arrow } from "@/components/ui";
+import { ArrowRight } from "lucide-react";
+import Crumbs from "@/components/Crumbs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { industries, photos, serviceBySlug, serviceLines } from "@/lib/content";
 
 export const dynamicParams = false;
@@ -30,9 +32,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
       <section className="bg-ink text-white">
         <div className="grid lg:min-h-[640px] lg:grid-cols-2">
           <div className="container-x flex flex-col justify-end pb-14 pt-32 lg:ml-auto lg:max-w-[42rem] lg:pr-12">
-            <nav aria-label="Breadcrumb" className="code !text-[0.6875rem] text-white/60">
-              <Link href="/" className="hover:text-white">HOME</Link> <span aria-hidden>/</span> <span className="text-white/90">{s.name.toUpperCase()}</span>
-            </nav>
+            <Crumbs current={s.name} />
             <h1 className="display mt-5 text-[2.75rem] sm:text-[4rem] xl:text-[4.75rem]">{s.name}</h1>
             <p className="mt-5 text-[1.25rem] text-sky" style={{ fontFamily: "var(--font-display)" }}>{s.short}</p>
             <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-white/75">{s.lead}</p>
@@ -78,11 +78,15 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
         <section className="border-t border-line py-16 md:py-20">
           <div className="container-x">
             <p className="eyebrow text-signal">Where it is used</p>
-            <ul className="mt-8 grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {forIndustries.map((i) => (
-                <li key={i.name} className="border-b border-r border-line p-6">
-                  <h3 className="text-[1.0625rem] font-semibold" style={{ fontFamily: "var(--font-display)" }}>{i.name}</h3>
-                  <p className="mt-2 text-[0.875rem] leading-relaxed text-muted">{i.text}</p>
+                <li key={i.name}>
+                  <Card className="h-full gap-0 rounded-md border-line py-0 shadow-none transition-colors hover:border-tuv">
+                    <CardHeader className="gap-0 p-6">
+                      <CardTitle className="text-[1.0625rem]" style={{ fontFamily: "var(--font-display)" }}><h3>{i.name}</h3></CardTitle>
+                      <CardDescription className="mt-2 text-[0.875rem] leading-relaxed text-muted">{i.text}</CardDescription>
+                    </CardHeader>
+                  </Card>
                 </li>
               ))}
             </ul>
@@ -95,12 +99,14 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
           <p className="code !text-[0.6875rem] text-muted">ALSO NEEDED ON THE SAME PROJECT</p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {related.map((r) => (
-              <Link key={r.slug} href={`/${r.slug}`} className="group grid grid-cols-[120px_1fr] overflow-hidden border border-line bg-white transition-colors hover:border-tuv">
-                <div className="relative min-h-[112px]"><Image src={photos[r.photo].src} alt="" fill sizes="120px" className="object-cover" /></div>
-                <div className="flex flex-col justify-between p-5">
-                  <span className="text-[1.0625rem] font-semibold" style={{ fontFamily: "var(--font-display)" }}>{r.name}</span>
-                  <span className="self-end text-tuv"><Arrow className="transition-transform group-hover:translate-x-1" /></span>
-                </div>
+              <Link key={r.slug} href={`/${r.slug}`} className="group block">
+                <Card className="grid h-full grid-cols-[120px_1fr] gap-0 overflow-hidden rounded-md border-line py-0 shadow-none transition-colors group-hover:border-tuv">
+                  <div className="relative min-h-[112px]"><Image src={photos[r.photo].src} alt="" fill sizes="120px" className="object-cover transition-transform duration-500 group-hover:scale-105" /></div>
+                  <CardContent className="flex flex-col justify-between p-5">
+                    <span className="text-[1.0625rem] font-semibold" style={{ fontFamily: "var(--font-display)" }}>{r.name}</span>
+                    <ArrowRight className="size-4 self-end text-tuv transition-transform group-hover:translate-x-1" aria-hidden />
+                  </CardContent>
+                </Card>
               </Link>
             ))}
           </div>
