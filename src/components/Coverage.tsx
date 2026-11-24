@@ -17,7 +17,7 @@ export default function Coverage() {
     <div className="grid items-center gap-10 lg:grid-cols-12">
       <div className="relative -mx-6 aspect-square lg:col-span-6 lg:-ml-16 lg:mr-0">
         <GlobeClient className="h-full w-full" focus={sel} />
-        <p className="code absolute bottom-2 left-6 !text-[0.625rem] text-sky/70 lg:left-16">DRAG TO ROTATE · SELECT A REGION</p>
+        <p className="code absolute bottom-2 left-6 !text-[0.625rem] text-sky/90 lg:left-16">DRAG TO ROTATE · SELECT A REGION</p>
       </div>
 
       <div className="lg:col-span-6">

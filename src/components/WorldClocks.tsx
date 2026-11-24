@@ -27,7 +27,7 @@ export default function WorldClocks() {
           <span className="code !text-[0.75rem] text-white" suppressHydrationWarning>
             {now ? fmt(l.tz, now) : "--:--"}
           </span>
-          {now && <span className="code !text-[0.625rem] text-sky/70">{isDay(l.tz, now) ? "DAY" : "NIGHT"}</span>}
+          {now && <span className="code !text-[0.625rem] text-sky/90">{isDay(l.tz, now) ? "DAY" : "NIGHT"}</span>}
         </li>
       ))}
     </ul>

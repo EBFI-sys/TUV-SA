@@ -47,7 +47,7 @@ export default function HeroConsole() {
             <span className={`flex-1 text-[1.0625rem] font-semibold ${k === i ? "text-white" : "text-white/70"}`} style={{ fontFamily: "var(--font-display)" }}>
               {line.slug === "testing" ? "Testing & Technical" : line.name}
             </span>
-            <span className={`code hidden !text-[0.625rem] sm:inline ${k === i ? "text-sky" : "text-sky/55"}`}>{line.codes.slice(0, 3).join(" · ")}</span>
+            <span className={`code hidden !text-[0.625rem] sm:inline ${k === i ? "text-sky" : "text-sky/80"}`}>{line.codes.slice(0, 3).join(" · ")}</span>
           </button>
         ))}
       </div>
