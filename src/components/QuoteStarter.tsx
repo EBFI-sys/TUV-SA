@@ -2,9 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { serviceLines } from "@/lib/content";
-import { Arrow } from "@/components/ui";
 
+const dark =
+  "h-14 rounded-[2px] border-white/30 bg-ink/35 text-[0.9375rem] text-white shadow-none placeholder:text-white/70 focus-visible:border-white focus-visible:ring-white/15";
+
+// 21st.dev · shadcn/ui Native Select, Input, Label, Button
 export default function QuoteStarter() {
   const router = useRouter();
   const [service, setService] = useState(serviceLines[0].slug);
@@ -21,20 +29,20 @@ export default function QuoteStarter() {
       }}
     >
       <div className="md:col-span-3">
-        <label htmlFor="qs-service" className="label text-white/75">Service</label>
-        <select id="qs-service" value={service} onChange={(e) => setService(e.target.value)} className="field field-dark h-14 appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22><path d=%22M1 1l5 5 5-5%22 stroke=%22white%22 fill=%22none%22 stroke-width=%221.5%22/></svg>')] bg-[right_1rem_center] bg-no-repeat">
-          {serviceLines.map((s) => <option key={s.slug} value={s.slug} className="text-text">{s.name}</option>)}
-        </select>
+        <Label htmlFor="qs-service" className="label text-white/75">Service</Label>
+        <NativeSelect id="qs-service" value={service} onChange={(e) => setService(e.target.value)} className={`${dark} [&+svg]:text-white`}>
+          {serviceLines.map((s) => <NativeSelectOption key={s.slug} value={s.slug}>{s.name}</NativeSelectOption>)}
+        </NativeSelect>
       </div>
       <div className="md:col-span-4">
-        <label htmlFor="qs-location" className="label text-white/75">Location</label>
-        <input id="qs-location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Port, city or plant" className="field field-dark h-14" />
+        <Label htmlFor="qs-location" className="label text-white/75">Location</Label>
+        <Input id="qs-location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Port, city or plant" className={dark} />
       </div>
       <div className="md:col-span-2">
-        <label htmlFor="qs-date" className="label text-white/75">Date</label>
-        <input id="qs-date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Expected date" className="field field-dark h-14" />
+        <Label htmlFor="qs-date" className="label text-white/75">Date</Label>
+        <Input id="qs-date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Expected date" className={dark} />
       </div>
-      <button type="submit" className="btn btn-light h-14 justify-center md:col-span-3">Continue to quote <Arrow /></button>
+      <Button type="submit" variant="light" className="h-14 text-[0.9375rem] font-semibold md:col-span-3">Continue to quote <ArrowRight /></Button>
     </form>
   );
 }

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import PageHero from "@/components/PageHero";
-import { Arrow } from "@/components/ui";
+import { ArrowRight } from "lucide-react";
 import { company, photos } from "@/lib/content";
 
 export const metadata: Metadata = { title: "About", description: "TUV Thuringen SouthAsia is a company of the TÜV Thüringen Group, headquartered in Navi Mumbai, India." };
@@ -48,8 +49,8 @@ export default function AboutPage() {
             </dl>
           </div>
           <div className="flex flex-col items-start gap-3 md:items-end md:justify-end">
-            <Link href="/accreditations" className="btn btn-outline">Accreditations <Arrow /></Link>
-            <Link href="/contact" className="btn btn-primary">Request a quote <Arrow /></Link>
+            <Button asChild variant="outline" size="xl"><Link href="/accreditations">Accreditations <ArrowRight /></Link></Button>
+            <Button asChild variant="default" size="xl"><Link href="/contact">Request a quote <ArrowRight /></Link></Button>
           </div>
         </div>
       </section>
