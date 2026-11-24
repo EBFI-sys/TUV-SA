@@ -44,3 +44,6 @@ next-env.d.ts
 
 # lockfile not tracked (repo is pushed via the GitHub connector); versions are pinned in package.json
 package-lock.json
+
+# generated before dev/build by scripts/gen-globe.mjs
+/src/data/
