@@ -21,7 +21,7 @@ export default function Footer() {
             ))}
             <li><Link className="hover:text-white" href="/industries">Industries</Link></li>
             <li><Link className="hover:text-white" href="/accreditations">Accreditations</Link></li>
-            <li><Link className="hover:text-white" href="/#verify">Verify a certificate</Link></li>
+            <li><Link className="hover:text-white" href="/accreditations#verify">Verify a certificate</Link></li>
             <li><Link className="hover:text-white" href="/insights">Insights</Link></li>
           </ul>
         </nav>
@@ -39,7 +39,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-x flex flex-col gap-4 py-6 text-[0.75rem] text-white/45 md:flex-row md:items-center md:justify-between">
+        <div className="container-x flex flex-col gap-4 py-6 text-[0.75rem] text-white/65 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {company.legalName} · CIN <span className="code !text-[0.6875rem]">{company.cin}</span>
           </p>
@@ -49,7 +49,7 @@ export default function Footer() {
             <li><Link className="hover:text-white" href="/legal/notice">Legal notice</Link></li>
           </ul>
         </div>
-        <p className="container-x pb-8 text-[0.6875rem] leading-relaxed text-white/35">
+        <p className="container-x pb-8 text-[0.6875rem] leading-relaxed text-white/55">
           Certificates and notified-body services are issued by the accredited TÜV Thüringen Group company named on each
           certificate or report.
         </p>

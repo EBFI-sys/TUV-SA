@@ -1,0 +1,111 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import ServiceAccordion from "@/components/ServiceAccordion";
+import ServiceQuoteCard from "@/components/ServiceQuoteCard";
+import { Arrow } from "@/components/ui";
+import { industries, photos, serviceBySlug, serviceLines } from "@/lib/content";
+
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return serviceLines.map((s) => ({ service: s.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ service: string }> }): Promise<Metadata> {
+  const s = serviceBySlug((await params).service);
+  if (!s) return {};
+  return { title: s.name, description: `${s.short} ${s.lead}` };
+}
+
+export default async function ServicePage({ params }: { params: Promise<{ service: string }> }) {
+  const s = serviceBySlug((await params).service);
+  if (!s) notFound();
+  const p = photos[s.photo];
+  const related = serviceLines.filter((x) => x.slug !== s.slug);
+  const forIndustries = industries.filter((i) => i.services.includes(s.slug));
+
+  return (
+    <>
+      <section className="bg-ink text-white">
+        <div className="grid lg:min-h-[640px] lg:grid-cols-2">
+          <div className="container-x flex flex-col justify-end pb-14 pt-32 lg:ml-auto lg:max-w-[42rem] lg:pr-12">
+            <nav aria-label="Breadcrumb" className="code !text-[0.6875rem] text-white/60">
+              <Link href="/" className="hover:text-white">HOME</Link> <span aria-hidden>/</span> <span className="text-white/90">{s.name.toUpperCase()}</span>
+            </nav>
+            <h1 className="display mt-5 text-[2.75rem] sm:text-[4rem] xl:text-[4.75rem]">{s.name}</h1>
+            <p className="mt-5 text-[1.25rem] text-sky" style={{ fontFamily: "var(--font-display)" }}>{s.short}</p>
+            <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-white/75">{s.lead}</p>
+            <dl className="mt-10 grid gap-6 sm:grid-cols-3">
+              {s.facts.map(([k, v]) => (
+                <div key={k} className="border-t border-line-dark pt-4">
+                  <dt className="code !text-[0.6875rem] uppercase text-sky">{k}</dt>
+                  <dd className="mt-2 text-[0.875rem] leading-snug">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="relative min-h-[300px] lg:min-h-full">
+            <Image src={p.src} alt={p.alt} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+        <div className="container-x grid gap-12 lg:grid-cols-12">
+          <aside className="hidden lg:col-span-3 lg:block">
+            <div className="sticky top-28">
+              <p className="code !text-[0.6875rem] text-muted">ON THIS PAGE</p>
+              <ul className="mt-4 space-y-2.5 text-[0.875rem] text-muted">
+                {s.subs.map((sub) => (
+                  <li key={sub.name}><a className="hover:text-tuv" href={`#${sub.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}>{sub.name}</a></li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+          <div className="lg:col-span-6">
+            <h2 className="display text-[2rem] md:text-[2.5rem]">{s.subs.length} services</h2>
+            <p className="mt-3 text-[1rem] text-muted">Open a service to see what we check and the codes we usually work to.</p>
+            <ServiceAccordion subs={s.subs} />
+          </div>
+          <div className="lg:col-span-3">
+            <div className="sticky top-28"><ServiceQuoteCard service={s.slug} title={s.cta} fields={s.fields} /></div>
+          </div>
+        </div>
+      </section>
+
+      {forIndustries.length > 0 && (
+        <section className="border-t border-line py-16 md:py-20">
+          <div className="container-x">
+            <p className="eyebrow text-signal">Where it is used</p>
+            <ul className="mt-8 grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+              {forIndustries.map((i) => (
+                <li key={i.name} className="border-b border-r border-line p-6">
+                  <h3 className="text-[1.0625rem] font-semibold" style={{ fontFamily: "var(--font-display)" }}>{i.name}</h3>
+                  <p className="mt-2 text-[0.875rem] leading-relaxed text-muted">{i.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <section className="bg-paper py-16 md:py-20">
+        <div className="container-x">
+          <p className="code !text-[0.6875rem] text-muted">ALSO NEEDED ON THE SAME PROJECT</p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {related.map((r) => (
+              <Link key={r.slug} href={`/${r.slug}`} className="group grid grid-cols-[120px_1fr] overflow-hidden border border-line bg-white transition-colors hover:border-tuv">
+                <div className="relative min-h-[112px]"><Image src={photos[r.photo].src} alt="" fill sizes="120px" className="object-cover" /></div>
+                <div className="flex flex-col justify-between p-5">
+                  <span className="text-[1.0625rem] font-semibold" style={{ fontFamily: "var(--font-display)" }}>{r.name}</span>
+                  <span className="self-end text-tuv"><Arrow className="transition-transform group-hover:translate-x-1" /></span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

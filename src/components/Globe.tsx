@@ -75,9 +75,16 @@ const atmoFrag = /* glsl */ `
   }
 `;
 
-export default function Globe({ className = "" }: { className?: string }) {
+export default function Globe({ className = "", focus }: { className?: string; focus?: number }) {
   const wrap = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
+  const focusRef = useRef<number | undefined>(focus);
+  const aimRef = useRef(focus !== undefined);
+
+  useEffect(() => {
+    focusRef.current = focus;
+    aimRef.current = focus !== undefined;
+  }, [focus]);
 
   useEffect(() => {
     const el = wrap.current;
@@ -242,6 +249,7 @@ export default function Globe({ className = "" }: { className?: string }) {
     let velocity = 0;
     const onDown = (e: PointerEvent) => {
       dragging = true;
+      aimRef.current = false;
       lastX = e.clientX;
       renderer.domElement.style.cursor = "grabbing";
       renderer.domElement.setPointerCapture(e.pointerId);
@@ -276,7 +284,15 @@ export default function Globe({ className = "" }: { className?: string }) {
       if (!visible) return;
       const dt = Math.min(clock.getDelta(), 0.05);
       const time = clock.elapsedTime;
-      if (!dragging) {
+      const f = focusRef.current;
+      if (!dragging && aimRef.current && f !== undefined && locations[f]) {
+        let target = (-90 - locations[f].lon) * DEG;
+        while (target - theta > Math.PI) target -= Math.PI * 2;
+        while (target - theta < -Math.PI) target += Math.PI * 2;
+        theta += (target - theta) * (reduce ? 1 : 0.06);
+        tilt.rotation.x += (locations[f].lat * DEG * 0.8 - tilt.rotation.x) * (reduce ? 1 : 0.06);
+        velocity = 0;
+      } else if (!dragging) {
         velocity *= 0.94;
         theta += velocity + (reduce ? 0 : dt * 0.045);
       }

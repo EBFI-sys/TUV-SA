@@ -7,6 +7,6 @@ const Globe = dynamic(() => import("./Globe"), {
   loading: () => <div className="absolute inset-0" />,
 });
 
-export default function GlobeClient({ className = "" }: { className?: string }) {
-  return <Globe className={className} />;
+export default function GlobeClient({ className = "", focus }: { className?: string; focus?: number }) {
+  return <Globe className={className} focus={focus} />;
 }
