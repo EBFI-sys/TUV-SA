@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { Separator } from "@/components/ui/separator";
 import { company, serviceLines } from "@/lib/content";
 
 export default function Footer() {
@@ -38,7 +39,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <Separator className="bg-white/10" />
+      <div>
         <div className="container-x flex flex-col gap-4 py-6 text-[0.75rem] text-white/65 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {company.legalName} · CIN <span className="code !text-[0.6875rem]">{company.cin}</span>
