@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
@@ -9,7 +10,7 @@ export default function NotFound() {
         <p className="mt-6 max-w-lg text-[1.0625rem] leading-relaxed text-white/65">
           The full site is being built section by section. The home page lists every service line in the meantime.
         </p>
-        <Link href="/" className="btn btn-light mt-10 self-start">Back to the home page</Link>
+        <Button asChild variant="light" size="xl" className="mt-10 self-start"><Link href="/">Back to the home page</Link></Button>
       </div>
     </section>
   );

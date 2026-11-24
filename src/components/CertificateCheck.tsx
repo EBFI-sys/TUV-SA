@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { Loader2, Search } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type Result =
   | { state: "idle" }
@@ -35,7 +39,7 @@ export default function CertificateCheck() {
     <div>
       <form onSubmit={submit} className="flex flex-col gap-3 sm:flex-row" noValidate>
         <label htmlFor="cert-number" className="sr-only">Certificate number</label>
-        <input
+        <Input
           id="cert-number"
           name="cert-number"
           value={value}
@@ -43,11 +47,11 @@ export default function CertificateCheck() {
           placeholder="Certificate number, e.g. TSA-Q-2026-0001"
           autoComplete="off"
           spellCheck={false}
-          className="code h-12 flex-1 rounded-[2px] border border-line bg-white px-4 !text-[0.9375rem] text-text placeholder:text-faint focus:border-tuv focus:outline-none"
+          className="code h-12 flex-1 rounded-[2px] bg-white px-4 !text-[0.9375rem]"
         />
-        <button type="submit" className="btn btn-primary justify-center" disabled={res.state === "loading"}>
-          {res.state === "loading" ? "Checking…" : "Check certificate"}
-        </button>
+        <Button type="submit" size="xl" disabled={res.state === "loading"}>
+          {res.state === "loading" ? <><Loader2 className="animate-spin" /> Checking…</> : <><Search /> Check certificate</>}
+        </Button>
       </form>
 
       <div aria-live="polite" className="mt-5 min-h-[3rem]">
@@ -62,7 +66,7 @@ export default function CertificateCheck() {
         )}
         {res.state === "found" && (
           <dl className="grid grid-cols-2 gap-x-8 gap-y-3 border-l-2 border-tuv pl-4 text-[0.9375rem] sm:grid-cols-3">
-            <div><dt className="eyebrow text-faint">Status</dt><dd className="mt-1 font-semibold">{res.cert.status}</dd></div>
+            <div><dt className="eyebrow text-faint">Status</dt><dd className="mt-1"><Badge className="rounded-[2px]">{res.cert.status}</Badge></dd></div>
             <div><dt className="eyebrow text-faint">Holder</dt><dd className="mt-1">{res.cert.holder}</dd></div>
             <div><dt className="eyebrow text-faint">Standard</dt><dd className="mt-1">{res.cert.standard}</dd></div>
             {res.cert.validUntil && <div><dt className="eyebrow text-faint">Valid until</dt><dd className="code mt-1 !text-[0.875rem]">{res.cert.validUntil}</dd></div>}

@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/* shadcn/ui + Magic UI (21st.dev catalog) components: dark: only under an explicit .dark ancestor */
+@custom-variant dark (&:is(.dark *));
 
 /* TUV Thuringen SouthAsia — "Calibrated": ink-navy instrument panels, paper-white reading surfaces,
    TÜV blue as the brand voice, shield red only as a signal (HQ marker, live state, focus). */
@@ -23,6 +27,57 @@
   --font-mono: var(--font-jbmono), ui-monospace, "SF Mono", Menlo, monospace;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Magic UI marquee */
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(calc(-100% - var(--gap))); } }
+  @keyframes marquee-vertical { from { transform: translateY(0); } to { transform: translateY(calc(-100% - var(--gap))); } }
+}
+
+/* shadcn semantic tokens mapped to the TÜV palette (radius kept engineering-sharp) */
+:root {
+  --radius: 0.125rem;
+  --background: #ffffff;
+  --foreground: #0c1a2c;
+  --card: #ffffff;
+  --card-foreground: #0c1a2c;
+  --popover: #ffffff;
+  --popover-foreground: #0c1a2c;
+  --primary: #003777;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f6f9;
+  --secondary-foreground: #0c1a2c;
+  --muted-foreground: #50627a;
+  --accent: #eef3fa;
+  --accent-foreground: #003777;
+  --destructive: #c90618;
+  --border: #dbe2eb;
+  --input: #c9d3df;
+  --ring: #003777;
+}
+@theme inline {
+  --radius-sm: calc(var(--radius) * 0.75);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.5);
+  --radius-xl: calc(var(--radius) * 2);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
 @layer base {

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import PageHero from "@/components/PageHero";
-import { Arrow } from "@/components/ui";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = { title: "Insights", description: "Technical notes on inspection, marine survey, certification and EU market access." };
 
@@ -26,7 +27,7 @@ export default function InsightsPage() {
               </li>
             ))}
           </ul>
-          <Link href="/contact" className="btn btn-outline mt-10">Ask a technical question <Arrow /></Link>
+          <Button asChild variant="outline" size="xl" className="mt-10"><Link href="/contact">Ask a technical question <ArrowRight /></Link></Button>
         </div>
       </section>
     </>

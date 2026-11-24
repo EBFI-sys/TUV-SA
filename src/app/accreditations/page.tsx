@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import PageHero from "@/components/PageHero";
 import CertificateCheck from "@/components/CertificateCheck";
 import { accreditations } from "@/lib/content";
@@ -16,16 +18,16 @@ export default function AccreditationsPage() {
       <section className="py-16 md:py-24">
         <div className="container-x space-y-4">
           {accreditations.map((a) => (
-            <article key={a.id} className="grid gap-6 border border-line p-6 md:grid-cols-12 md:p-8">
+            <Card key={a.id} className="grid gap-6 rounded-md border-line p-6 shadow-none md:grid-cols-12 md:p-8">
               <div className="md:col-span-5">
-                <p className="code !text-[0.6875rem] uppercase text-muted">{a.kind}</p>
+                <Badge variant="outline" className="code rounded-[2px] border-line !text-[0.625rem] uppercase text-muted">{a.kind}</Badge>
                 <h2 className="display mt-3 text-[2rem] text-tuv">{a.id}</h2>
                 <p className="mt-2 text-[0.9375rem] text-muted">{a.holder}</p>
               </div>
               <ul className="space-y-2 text-[0.9375rem] md:col-span-7 md:border-l md:border-line md:pl-8">
                 {a.scope.map((s) => <li key={s}>{s}</li>)}
               </ul>
-            </article>
+            </Card>
           ))}
           <p className="pt-4 text-[0.875rem] text-muted">
             Notified bodies can be checked in the European Commission&apos;s NANDO database under their four-digit numbers.
