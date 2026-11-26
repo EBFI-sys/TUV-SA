@@ -16,7 +16,7 @@ const docs: Record<string, Doc> = {
       ["Consent", ["We process quote-request data on the basis of the consent you give in the form. You can withdraw consent at any time by asking us to delete your request; this does not affect processing already carried out."]],
       ["Who processes it for us", ["Vercel Inc. hosts the website. Sanity AS stores quote requests and certificate records. Both act on our instructions as data processors. Data may be processed outside India, in countries not restricted under section 16 of the Act."]],
       ["How long we keep it", ["Quote requests that do not lead to a contract are deleted 24 months after receipt. Where a contract follows, records are kept for the period required by Indian tax and company law."]],
-      ["Your rights", ["You can ask for a summary of the personal data we hold about you, have it corrected, completed or erased, nominate another person to exercise your rights, and have a grievance addressed.", "Send your request through the quote form, choosing any service and writing \"Privacy request\" in the details, or by post to the registered office. If you are not satisfied with our response, you may complain to the Data Protection Board of India."]],
+      ["Your rights", ["You can ask for a summary of the personal data we hold about you, have it corrected, completed or erased, nominate another person to exercise your rights, and have a grievance addressed.", `Email ${company.email} with "Privacy request" in the subject, or write to the registered office. If you are not satisfied with our response, you may complain to the Data Protection Board of India.`]],
       ["Cookies", ["This website does not use analytics or advertising cookies. It may store a technical setting in your browser that is needed for the site to work."]],
       ["Changes", ["Version 1.0, 24 November 2026. We will publish any changes on this page."]],
     ],
@@ -37,7 +37,7 @@ const docs: Record<string, Doc> = {
     title: "Legal notice",
     lead: "Company information.",
     sections: [
-      ["Company", [company.legalName, `Corporate Identity Number: ${company.cin}`, `Incorporated: ${company.incorporated}`, `Registered office: ${company.address}`]],
+      ["Company", [company.legalName, `Corporate Identity Number: ${company.cin}`, `Incorporated: ${company.incorporated}`, `Registered office: ${company.address}`, `Email: ${company.email}`]],
       ["Group", ["A company of the TÜV Thüringen Group. Group headquarters: TÜV Thüringen e.V., Erfurt, Germany."]],
       ["Photography", ["Photographs on this website are illustrations of the work described."]],
     ],

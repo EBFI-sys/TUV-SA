@@ -46,6 +46,7 @@ export default function AboutPage() {
               <div><dt className="text-muted">Legal name</dt><dd>{company.legalName}</dd></div>
               <div><dt className="text-muted">CIN</dt><dd className="code !text-[0.875rem]">{company.cin}</dd></div>
               <div><dt className="text-muted">Registered office</dt><dd>{company.address}</dd></div>
+              <div><dt className="text-muted">Email</dt><dd><a className="text-tuv hover:underline" href={`mailto:${company.email}`}>{company.email}</a></dd></div>
             </dl>
           </div>
           <div className="flex flex-col items-start gap-3 md:items-end md:justify-end">

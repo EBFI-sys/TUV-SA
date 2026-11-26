@@ -28,7 +28,10 @@
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Magic UI marquee */
+}
+
+/* Magic UI marquee: `inline` so var(--duration) resolves on the element, not on :root */
+@theme inline {
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(calc(-100% - var(--gap))); } }
@@ -148,4 +151,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  /* the two running strips keep moving slowly (hover pauses them) */
+  .marquee-run > * { animation-duration: calc(var(--duration) * 1.5) !important; animation-iteration-count: infinite !important; }
 }

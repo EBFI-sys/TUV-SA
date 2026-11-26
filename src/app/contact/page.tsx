@@ -36,7 +36,11 @@ export default function ContactPage() {
               </ol>
               <div className="mt-8 border-t border-line pt-6 text-[0.875rem] text-muted">
                 <p className="code !text-[0.6875rem]">OFFICE</p>
-                <address className="mt-2 not-italic leading-relaxed text-text">{company.legalName}<br />{company.address}</address>
+                <address className="mt-2 not-italic leading-relaxed text-text">
+                  {company.legalName}<br />{company.address}
+                  <br />
+                  <a href={`mailto:${company.email}`} className="mt-2 inline-block font-semibold text-tuv hover:underline">{company.email}</a>
+                </address>
               </div>
             </div>
           </aside>

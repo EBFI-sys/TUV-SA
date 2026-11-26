@@ -35,6 +35,8 @@ export default function Footer() {
           </ul>
           <address className="mt-8 not-italic text-[0.875rem] leading-relaxed text-white/55">
             {company.address}
+            <br />
+            <a href={`mailto:${company.email}`} className="mt-3 inline-block text-white/85 hover:text-white">{company.email}</a>
           </address>
         </div>
       </div>

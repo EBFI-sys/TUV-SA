@@ -4,6 +4,19 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
+import { company } from "@/lib/content";
+
+const orgLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "TUV Thuringen SouthAsia",
+  legalName: company.legalName,
+  url: "https://tuv-tsa.com",
+  email: company.email,
+  logo: "https://tuv-tsa.com/brand/logo.svg",
+  address: { "@type": "PostalAddress", streetAddress: "Office 604, One Platinum, Plot 8, Sector 15", addressLocality: "Navi Mumbai", postalCode: "400614", addressRegion: "Maharashtra", addressCountry: "IN" },
+  contactPoint: { "@type": "ContactPoint", contactType: "sales", email: company.email, availableLanguage: ["English"] },
+};
 
 const plex = localFont({
   src: "../../node_modules/@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2",
@@ -53,6 +66,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <Footer />
         <CommandPalette />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       </body>
     </html>
   );

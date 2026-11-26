@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { Input } from "@/components/ui/input";
-import { locations } from "@/lib/content";
+import { locations, offices } from "@/lib/content";
 
 const coord = (lat: number, lon: number) =>
   `${Math.abs(lat).toFixed(4)}° ${lat >= 0 ? "N" : "S"}  ${Math.abs(lon).toFixed(4)}° ${lon >= 0 ? "E" : "W"}`;
@@ -27,7 +27,7 @@ const GLOBE: COBEOptions = {
   baseColor: [0.16, 0.34, 0.58],
   markerColor: [0.56, 0.75, 1],
   glowColor: [0.04, 0.16, 0.32],
-  markers: locations.map((l) => ({ location: [l.lat, l.lon] as [number, number], size: l.kind === "hq" ? 0.09 : 0.05 })),
+  markers: offices.map((o) => ({ location: [o.lat, o.lon] as [number, number], size: o.hq ? 0.09 : 0.045 })),
 };
 
 export default function Coverage() {
