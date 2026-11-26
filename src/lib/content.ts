@@ -31,12 +31,12 @@ export const serviceLines: ServiceLine[] = [
     name: "Inspection",
     navLabel: "Inspection",
     short: "At the supplier's plant, before you pay or ship.",
-    lead: "Independent inspectors witness manufacturing, testing and loading against your specification, inspection and test plan and purchase order.",
+    lead: "Independent inspectors witness manufacturing, testing and loading against your specification, inspection and test plan and purchase order, and audit suppliers before you place the order.",
     photo: "inspection",
-    codes: ["ITP", "FAT", "PSI", "NDT"],
+    codes: ["PRODUCTION", "FAT", "PSI", "NDT"],
     facts: [
       ["Works to", "Your ITP, purchase order and code: ASME, API, EN, ISO"],
-      ["Where", "Vendor shops in India and worldwide"],
+      ["Where", "Vendor shops worldwide"],
       ["Deliverable", "Photo-documented report in one format"],
     ],
     cta: "Plan an inspection",
@@ -46,14 +46,17 @@ export const serviceLines: ServiceLine[] = [
       { label: "Inspection date", placeholder: "Expected week", name: "date" },
     ],
     subs: [
-      { name: "Third-party and vendor inspection", summary: "Inspection of equipment and materials at the manufacturer, at the hold and witness points agreed in your ITP.", checks: ["Dimensional and visual checks", "Review of material certificates (EN 10204 3.1 / 3.2)", "Witnessing of pressure, performance and functional tests", "Release note or non-conformance report"], codes: ["ASME VIII", "API 6D", "EN 13445", "ISO 9712"] },
+      { name: "Third-party and second-party inspection", summary: "Inspection of equipment and materials at the manufacturer, at every hold and witness point agreed in your ITP, from the first heat of steel to the loaded truck.", checks: ["Pre-inspection meeting and document review", "Incoming control inspection of raw materials and bought-out items", "Review of material certificates (EN 10204 3.1 / 3.2)", "In-process inspection during production", "NDT witness and review of NDT reports", "Dimensional and visual checks", "Witnessing of pressure, performance and functional tests", "Final inspection and pre-shipment inspection", "Release note or non-conformance report"], codes: ["ASME VIII", "API 6D", "EN 13445", "EN 10204", "ISO 9712"] },
       { name: "FAT witnessing and surveillance", summary: "Factory acceptance tests witnessed on your behalf, and periodic surveillance visits through manufacturing.", checks: ["Test procedure and set-up review", "Witnessing of test runs and recorded values", "Punch list and open-point follow-up", "FAT report with test records attached"], codes: ["IEC 60034", "API 610", "API 617"] },
       { name: "Pre-shipment inspection", summary: "Quantity, quality, marking and packing checked before goods leave the supplier.", checks: ["Quantity count against packing list", "Sampling inspection to AQL", "Marking, labelling and packing", "Photo record of each lot"], codes: ["ISO 2859-1", "AQL"] },
       { name: "Loading supervision", summary: "Stowage, lashing and loading onto truck, container or vessel supervised and recorded.", checks: ["Condition of cargo before loading", "Container or hold condition", "Lashing and securing", "Seal numbers and loading tally"], codes: ["CTU Code", "CSS Code"] },
       { name: "Expediting", summary: "Manufacturing progress tracked against schedule, with delays flagged early.", checks: ["Sub-order and material status", "Progress against the baseline schedule", "Critical-path items and recovery actions", "Expediting report with photos"], codes: ["Schedule", "Progress"] },
       { name: "Welding, coating and NDT inspection", summary: "Qualification records, weld quality and coating systems inspected to the project specification.", checks: ["WPS, PQR and welder qualification review", "Visual weld inspection and NDT review", "Surface preparation and DFT measurement", "Coating holiday testing"], codes: ["ISO 15614", "ISO 9606", "ISO 8501", "NORSOK M-501"] },
       { name: "Pressure and lifting equipment", summary: "Inspection of pressure equipment and lifting appliances in manufacture and in service.", checks: ["Design and documentation review", "Hydrostatic and pneumatic tests", "Load tests and safe working load verification", "Inspection report and marking"], codes: ["PED 2014/68/EU", "ASME", "EN 13001"] },
-      { name: "Vendor assessment and technical audits", summary: "Capability and quality-system audits of suppliers before you place the order.", checks: ["Production capacity and equipment", "Quality management and traceability", "Qualified personnel and procedures", "Audit report with findings rated"], codes: ["ISO 9001", "ISO 3834"] },
+      { name: "Vendor assessment", summary: "Capability and quality-system assessment of new or existing suppliers before you place the order.", checks: ["Production capacity and equipment", "Quality management and traceability", "Qualified personnel and procedures", "Assessment report with supplier rating"], codes: ["ISO 9001", "ISO 3834", "ISO 19011"] },
+      { name: "Technical audit", summary: "Independent technical audit of a plant, a project or a production process against the contract, the code and good engineering practice.", checks: ["Process and procedure audit on site", "Compliance with specification and code", "Equipment, calibration and records", "Audit report with findings and corrective actions"], codes: ["ISO 19011", "ISO 9001", "ASME", "EN"] },
+      { name: "Food quality inspection", summary: "Quality, quantity, labelling and packing of food products and agricultural commodities, checked at the producer or before shipment.", checks: ["Sampling to AQL or contract", "Sensory, visual and physical checks", "Labelling, packing and shelf-life marking", "Witness of laboratory sampling and seals"], codes: ["ISO 2859-1", "Codex Alimentarius", "FSSAI"] },
+      { name: "Food quality audit", summary: "Second-party audit of food producers and suppliers against food safety and quality requirements.", checks: ["HACCP plan and prerequisite programmes", "Hygiene, pest control and traceability", "Supplier and raw material controls", "Audit report with graded findings"], codes: ["HACCP", "ISO 22000", "FSSC 22000", "BRCGS", "IFS Food"] },
     ],
   },
   {
@@ -184,16 +187,44 @@ export const industries = [
   { name: "Steel and fabrication", text: "Structural steel, welded assemblies and coatings to EN 1090, ISO 3834 and project specifications.", services: ["inspection", "certification"] },
   { name: "Chemicals and process", text: "Pressure vessels, heat exchangers and piping for chemical and petrochemical plants.", services: ["inspection", "testing"] },
   { name: "Machinery and equipment", text: "Machines and assemblies for CE marking and export to the European Union.", services: ["certification", "testing"] },
+  { name: "Food and agriculture", text: "Food products, ingredients and agricultural commodities: supplier audits, quality inspection and pre-shipment checks.", services: ["inspection", "marine-survey"] },
   { name: "Consumer products", text: "Electrical goods, furniture and toys tested for safety and quality before shipment.", services: ["testing", "inspection"] },
   { name: "Trading and commodities", text: "Quantity and quality of bulk and bagged cargo at loading and discharge.", services: ["marine-survey", "inspection"] },
 ];
 
+// Coverage regions (globe + accordion)
 export const locations = [
-  { name: "Navi Mumbai", region: "India", note: "Headquarters. Inspectors and surveyors across west-coast ports and industrial corridors.", lat: 19.033, lon: 73.0297, tz: "Asia/Kolkata", kind: "hq" as const },
-  { name: "Erfurt", region: "Europe", note: "TÜV Thüringen Group headquarters and group companies across the continent.", lat: 50.9787, lon: 11.0328, tz: "Europe/Berlin", kind: "group" as const },
-  { name: "Houston", region: "United States", note: "Vendor inspection and marine survey coverage.", lat: 29.76, lon: -95.37, tz: "America/Chicago", kind: "region" as const },
+  { name: "Navi Mumbai", region: "India", note: "Headquarters. Inspectors and surveyors across Indian ports and industrial corridors.", lat: 19.033, lon: 73.0297, tz: "Asia/Kolkata", kind: "hq" as const },
+  { name: "Erfurt", region: "Germany", note: "TÜV Thüringen Group headquarters.", lat: 50.9787, lon: 11.0328, tz: "Europe/Berlin", kind: "group" as const },
+  { name: "Katowice · Budapest · Bucharest", region: "Central and Eastern Europe", note: "Group companies in Poland, Slovakia, Hungary, Romania, Lithuania, Bosnia-Herzegovina and Ukraine.", lat: 47.5, lon: 19.04, tz: "Europe/Budapest", kind: "region" as const },
+  { name: "Collecchio · Oberentfelden", region: "Italy and Switzerland", note: "Group companies in Italy and Switzerland.", lat: 47.36, lon: 8.05, tz: "Europe/Zurich", kind: "region" as const },
   { name: "Shanghai", region: "China", note: "Supplier inspection and expediting.", lat: 31.23, lon: 121.47, tz: "Asia/Shanghai", kind: "region" as const },
   { name: "Astana", region: "Kazakhstan", note: "Inspection for energy and infrastructure projects.", lat: 51.17, lon: 71.45, tz: "Asia/Almaty", kind: "region" as const },
+];
+
+// Every TÜV Thüringen Group office shown in the local-time ticker and on the globe
+export const offices = [
+  { city: "Navi Mumbai", country: "India", lat: 19.033, lon: 73.0297, tz: "Asia/Kolkata", hq: true },
+  { city: "Erfurt", country: "Germany", lat: 50.9787, lon: 11.0328, tz: "Europe/Berlin" },
+  { city: "Shanghai", country: "China", lat: 31.23, lon: 121.47, tz: "Asia/Shanghai" },
+  { city: "Astana", country: "Kazakhstan", lat: 51.17, lon: 71.45, tz: "Asia/Almaty" },
+  { city: "Katowice", country: "Poland", lat: 50.264, lon: 19.024, tz: "Europe/Warsaw" },
+  { city: "Nitra", country: "Slovakia", lat: 48.307, lon: 18.087, tz: "Europe/Bratislava" },
+  { city: "Budapest", country: "Hungary", lat: 47.498, lon: 19.04, tz: "Europe/Budapest" },
+  { city: "Bucharest", country: "Romania", lat: 44.426, lon: 26.102, tz: "Europe/Bucharest" },
+  { city: "Kaunas", country: "Lithuania", lat: 54.898, lon: 23.904, tz: "Europe/Vilnius" },
+  { city: "Kyiv", country: "Ukraine", lat: 50.45, lon: 30.523, tz: "Europe/Kiev" },
+  { city: "Sarajevo", country: "Bosnia-Herzegovina", lat: 43.856, lon: 18.413, tz: "Europe/Sarajevo" },
+  { city: "Collecchio", country: "Italy", lat: 44.75, lon: 10.217, tz: "Europe/Rome" },
+  { city: "Oberentfelden", country: "Switzerland", lat: 47.357, lon: 8.046, tz: "Europe/Zurich" },
+];
+
+// Extra codes for the running standards strip (beyond those listed per service)
+export const extraStandards = [
+  "DNV-ST-N001", "DNV-OS-C101", "API RP 2A", "NORSOK N-004", "ISO 19902", "API 5L", "DNV-ST-F101",
+  "ISO 12944", "ISO 8501-1", "ISO 8502-3", "ISO 19840", "AMPP SP0188", "SSPC-PA 2", "NORSOK M-501",
+  "ISO 22000", "FSSC 22000", "HACCP", "BRCGS", "IFS Food", "GMP", "FSSAI", "Codex Alimentarius",
+  "ISO 3834", "EN 1090", "ASME IX", "AWS D1.1", "ISO 17025", "ISO 19011",
 ];
 
 export const workflow = [
@@ -208,4 +239,5 @@ export const company = {
   cin: "U71200MR2026FTC482970",
   incorporated: "23 November 2026",
   address: "Office 604, One Platinum, Plot 8, Sector 15, Navi Mumbai 400614, Maharashtra, India",
+  email: "office@tuv-tsa.com",
 };
