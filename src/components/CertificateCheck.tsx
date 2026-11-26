@@ -60,7 +60,8 @@ export default function CertificateCheck() {
           <div className="flex gap-3 border-l-2 border-faint pl-4">
             <p className="text-[0.9375rem] leading-relaxed text-muted">
               No certificate <span className="code !text-[0.875rem] text-text">{res.number}</span> is registered with TUV
-              Thuringen SouthAsia. Check the number as printed on the certificate, or send us a copy and we will confirm its status.
+              Thuringen SouthAsia. Check the number as printed on the certificate, or send a copy to{" "}
+              <a href="mailto:office@tuv-tsa.com" className="text-tuv underline underline-offset-2">office@tuv-tsa.com</a> and we will confirm its status.
             </p>
           </div>
         )}

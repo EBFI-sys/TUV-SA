@@ -59,8 +59,8 @@ export default function QuoteForm() {
           <p className="code flex items-center gap-2 !text-[0.6875rem] text-signal"><CheckCircle2 className="size-4" aria-hidden /> REQUEST RECEIVED</p>
           <CardTitle className="display mt-4 text-[2rem] font-[620]">Thank you. We have your request.</CardTitle>
           <CardDescription className="mt-4 max-w-lg text-[1rem] leading-relaxed text-muted">
-            Reference <span className="code !text-[0.9375rem] text-text">{status.ref}</span>. We reply by email with the specialist, the
-            date and the fee.
+            Reference <span className="code !text-[0.9375rem] text-text">{status.ref}</span>. We reply by email from{" "}
+            <a href="mailto:office@tuv-tsa.com" className="text-tuv underline underline-offset-2">office@tuv-tsa.com</a> with the specialist, the date and the fee.
           </CardDescription>
         </CardHeader>
         <CardContent className="p-0">
