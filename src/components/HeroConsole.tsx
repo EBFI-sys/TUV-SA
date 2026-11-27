@@ -36,7 +36,7 @@ export default function HeroConsole() {
             >
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/25 transition-colors group-data-[state=active]/t:bg-signal" />
               <span className="flex-1 text-[1.0625rem] font-semibold" style={{ fontFamily: "var(--font-display)" }}>
-                {line.slug === "testing" ? "Testing & Technical" : line.name}
+                {line.tab ?? line.name}
               </span>
               <span className="code hidden !text-[0.625rem] text-sky/80 sm:inline group-data-[state=active]/t:text-sky">
                 {line.codes.slice(0, 3).join(" · ")}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Anchor, BadgeCheck, ClipboardCheck, FlaskConical, ShieldCheck } from "lucide-react";
+import { Anchor, BadgeCheck, ClipboardCheck, FileSearch, FlaskConical, ShieldCheck } from "lucide-react";
 import HeroConsole from "@/components/HeroConsole";
 import WorldClocks from "@/components/WorldClocks";
 import Coverage from "@/components/Coverage";
@@ -14,9 +14,9 @@ import { NumberTicker } from "@/components/ui/number-ticker";
 import { Separator } from "@/components/ui/separator";
 import { accreditations, extraStandards, offices, photos, serviceLines } from "@/lib/content";
 
-const [inspection, marine, certification, testing] = serviceLines;
+const [inspection, marine, audits, certification, testing] = serviceLines;
 // Running standards strip: every code we cite plus offshore, coating and food-safety standards (labels that are not standards are left out)
-const notStandards = new Set(["PRODUCTION", "FAT", "PSI", "NDT", "AQL", "Schedule", "Progress", "ON/OFF-HIRE", "DRAFT", "BUNKER", "P&I", "H&M", "Cargo", "Condition", "SIRE-ready", "Charter party", "ROB", "BDN", "Hydrostatics", "Ultrasonic", "IMO", "IACS", "ISO", "CE", "PED", "GS", "ASME", "EN", "CBAM", "GHG Protocol", "UN/ECE", "Codex Alimentarius"]);
+const notStandards = new Set(["PRODUCTION", "FAT", "PSI", "NDT", "AQL", "Schedule", "Progress", "ON/OFF-HIRE", "DRAFT", "BUNKER", "P&I", "H&M", "Cargo", "Condition", "SIRE-ready", "Charter party", "ROB", "BDN", "Hydrostatics", "Ultrasonic", "IMO", "IACS", "ISO", "CE", "PED", "GS", "ASME", "EN", "CBAM", "GHG Protocol", "UN/ECE", "Codex Alimentarius", "TALLY", "Tally", "B/L", "Mate's receipt", "VENDOR", "AUDIT", "PMI"]);
 const allCodes = Array.from(new Set([...serviceLines.flatMap((s) => [...s.codes, ...s.subs.flatMap((x) => x.codes)]), ...extraStandards])).filter((c) => !notStandards.has(c));
 const totalServices = serviceLines.reduce((n, s) => n + s.subs.length, 0);
 
@@ -59,8 +59,8 @@ export default function Home() {
             <h1 className="display mt-7 text-[2.75rem] sm:text-[4rem] xl:text-[5.5rem]">Inspection, certification and&nbsp;testing.</h1>
             <p className="display mt-5 text-[1.5rem] text-sky sm:text-[2rem]">One TÜV partner, worldwide.</p>
             <p className="mt-8 max-w-[36rem] text-[1.0625rem] leading-relaxed text-white/75">
-              Inspectors at plant, surveyors in the port and on board, certification and testing according to the international
-              standards. One contract, one key contact &ndash; for the worldwide.
+              Inspectors at the plant, surveyors in port and on board, auditors at your suppliers, certification and testing to
+              international standards. One contract, one key contact, worldwide.
             </p>
           </div>
           <div className="min-w-0 lg:col-span-5 lg:col-start-8 xl:col-span-4 xl:col-start-9">
@@ -104,7 +104,7 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-6">
               <p className="eyebrow text-signal">Services</p>
-              <h2 className="display mt-5 text-[2.25rem] md:text-[3.5rem]">Four service lines.<br />One contract.</h2>
+              <h2 className="display mt-5 text-[2.25rem] md:text-[3.5rem]">Five service lines.<br />One contract.</h2>
             </div>
             <p className="text-[1.0625rem] leading-relaxed text-muted lg:col-span-5 lg:col-start-8">
               Book a FAT witness in Houston, a draft survey in Rotterdam and an ISO 9001 audit through one source, under one
@@ -117,7 +117,7 @@ export default function Home() {
             <BentoCard
               dark
               name={inspection.name}
-              description={`${inspection.subs.map((x) => x.name).slice(0, 4).join(", ")}.`}
+              description={inspection.subs.map((x) => x.name).slice(0, 4).join(" · ")}
               href={`/${inspection.slug}`}
               cta={`All ${inspection.subs.length} services`}
               Icon={ClipboardCheck}
@@ -127,12 +127,22 @@ export default function Home() {
             <BentoCard
               dark
               name={marine.name}
-              description={`${marine.subs.map((x) => x.name).slice(0, 4).join(", ")}.`}
+              description={marine.subs.map((x) => x.name).slice(0, 4).join(" · ")}
               href={`/${marine.slug}`}
               cta={`All ${marine.subs.length} services`}
               Icon={Anchor}
               background={<PhotoBg s={marine} sizes="(min-width: 768px) 42vw, 100vw" />}
               className="md:col-span-5"
+            />
+            <BentoCard
+              dark
+              name={audits.name}
+              description={audits.subs.map((x) => x.name).join(" · ")}
+              href={`/${audits.slug}`}
+              cta={`All ${audits.subs.length} services`}
+              Icon={FileSearch}
+              background={<PhotoBg s={audits} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" />}
+              className="md:col-span-6 lg:col-span-4"
             />
             <BentoCard
               name={certification.name}
@@ -142,22 +152,22 @@ export default function Home() {
               Icon={ShieldCheck}
               background={
                 <ul className="absolute inset-x-6 top-6 grid grid-cols-3 gap-px border border-line bg-line md:inset-x-8 md:top-8">
-                  {["ISO 9001", "ISO 14001", "ISO 45001", "ISO/IEC 27001", "ISO 50001", "PED 2014/68/EU", "EN 1090", "ISO 3834", "ISO 14064"].map((c) => (
+                  {["ISO 9001", "ISO 14001", "ISO 45001", "ISO/IEC 27001", "CE · PED", "GS mark", "EN 1090", "ISO 3834", "ISO 14067"].map((c) => (
                     <li key={c} className="code bg-white px-2 py-2.5 !text-[0.6875rem] text-tuv transition-colors group-hover:bg-paper">{c}</li>
                   ))}
                 </ul>
               }
-              className="md:col-span-5"
+              className="md:col-span-6 lg:col-span-4"
             />
             <BentoCard
               dark
               name={testing.name}
-              description={`${testing.subs.map((x) => x.name).join(", ")}.`}
+              description={testing.subs.map((x) => x.name).join(" · ")}
               href={`/${testing.slug}`}
               cta={`All ${testing.subs.length} services`}
               Icon={FlaskConical}
-              background={<PhotoBg s={testing} sizes="(min-width: 768px) 58vw, 100vw" />}
-              className="md:col-span-7"
+              background={<PhotoBg s={testing} sizes="(min-width: 1024px) 33vw, 100vw" />}
+              className="md:col-span-12 lg:col-span-4"
             />
           </BentoGrid>
         </div>
