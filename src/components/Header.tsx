@@ -76,6 +76,15 @@ export default function Header() {
                       </NavigationMenuLink>
                     </li>
                   ))}
+                  <li className="bg-paper">
+                    <NavigationMenuLink asChild className="h-full rounded-none p-5 hover:bg-white focus:bg-white">
+                      <Link href="/industries">
+                        <span className="code !text-[0.625rem] text-signal">9 SECTORS</span>
+                        <span className="mt-1 text-[1.0625rem] font-semibold text-text" style={{ fontFamily: "var(--font-display)" }}>Industries</span>
+                        <span className="mt-1 text-[0.8125rem] leading-snug text-muted">From plant to port, the sectors we work in.</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>

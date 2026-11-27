@@ -6,7 +6,7 @@ import { company, workflow } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Request a quote",
-  description: "Request a quote for inspection, marine survey, certification or testing anywhere in the world.",
+  description: "Request a quote for inspection, marine survey, audits, certification or testing anywhere in the world.",
 };
 
 export default function ContactPage() {

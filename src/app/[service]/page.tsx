@@ -74,6 +74,24 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
         </div>
       </section>
 
+      {s.focus && (
+        <section className="border-t border-line bg-paper py-16 md:py-20">
+          <div className="container-x">
+            <p className="eyebrow text-signal">{s.focus.eyebrow}</p>
+            <h2 className="display mt-4 text-[2rem] md:text-[2.5rem]">{s.focus.title}</h2>
+            <ul className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+              {s.focus.items.map((it, k) => (
+                <li key={it.name} className="bg-white p-6">
+                  <span className="code !text-[0.6875rem] text-muted">{String(k + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-4 text-[1.125rem] font-semibold leading-snug" style={{ fontFamily: "var(--font-display)" }}>{it.name}</h3>
+                  <p className="mt-2 text-[0.875rem] leading-relaxed text-muted">{it.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {forIndustries.length > 0 && (
         <section className="border-t border-line py-16 md:py-20">
           <div className="container-x">
@@ -97,7 +115,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
       <section className="bg-paper py-16 md:py-20">
         <div className="container-x">
           <p className="code !text-[0.6875rem] text-muted">ALSO NEEDED ON THE SAME PROJECT</p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {related.map((r) => (
               <Link key={r.slug} href={`/${r.slug}`} className="group block">
                 <Card className="grid h-full grid-cols-[120px_1fr] gap-0 overflow-hidden rounded-md border-line py-0 shadow-none transition-colors group-hover:border-tuv">

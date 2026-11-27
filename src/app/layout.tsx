@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     template: "%s | TUV Thuringen SouthAsia",
   },
   description:
-    "Inspection, marine survey, certification and testing worldwide. TUV Thuringen SouthAsia is a company of the TÜV Thüringen Group, headquartered in Navi Mumbai, India.",
+    "Inspection, marine survey, audits, certification and testing worldwide. TUV Thuringen SouthAsia is a company of the TÜV Thüringen Group, headquartered in Navi Mumbai, India.",
   openGraph: {
     type: "website",
     siteName: "TUV Thuringen SouthAsia",
