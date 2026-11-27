@@ -17,8 +17,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ service: string }> }): Promise<Metadata> {
   const s = serviceBySlug((await params).service);
   if (!s) return {};
-  return { title: s.name, description: `${s.short} ${s.lead}` };
+  return { title: seoTitle[s.slug] ?? s.name, description: `${s.short} ${s.lead}`, alternates: { canonical: `/${s.slug}` } };
 }
+
+const seoTitle: Record<string, string> = {
+  inspection: "Third-Party Inspection, India & Worldwide",
+  "marine-survey": "Marine & Cargo Survey Services Worldwide",
+  audits: "Supplier Audits & Vendor Assessment",
+  certification: "Certification: ISO, CE, EN 1090 & More",
+  testing: "Testing & Technical Services",
+};
 
 export default async function ServicePage({ params }: { params: Promise<{ service: string }> }) {
   const s = serviceBySlug((await params).service);
@@ -27,8 +35,31 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
   const related = serviceLines.filter((x) => x.slug !== s.slug);
   const forIndustries = industries.filter((i) => i.services.includes(s.slug));
 
+  const ld = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: s.name,
+      serviceType: s.name,
+      description: `${s.short} ${s.lead}`,
+      url: `https://tuv-tsa.com/${s.slug}`,
+      areaServed: "Worldwide",
+      provider: { "@id": "https://tuv-tsa.com/#organization" },
+      hasOfferCatalog: { "@type": "OfferCatalog", name: s.name, itemListElement: s.subs.map((x) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: x.name } })) },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://tuv-tsa.com" },
+        { "@type": "ListItem", position: 2, name: s.name, item: `https://tuv-tsa.com/${s.slug}` },
+      ],
+    },
+  ];
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <section className="bg-ink text-white">
         <div className="grid lg:min-h-[640px] lg:grid-cols-2">
           <div className="container-x flex flex-col justify-end pb-14 pt-32 lg:ml-auto lg:max-w-[42rem] lg:pr-12">
