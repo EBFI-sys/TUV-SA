@@ -5,12 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { industries, serviceBySlug } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Industries", description: "Inspection, marine survey, certification and testing for heavy industry and trade." };
+export const metadata: Metadata = { title: "Industries", description: "Inspection, marine survey, audits, certification and testing across energy, shipping, manufacturing, food and trade." };
 
 export default function IndustriesPage() {
   return (
     <>
-      <PageHero crumb="Industries" title="Built for heavy industry and trade." lead="The same inspectors, surveyors and auditors work across these sectors, to the codes each one uses." />
+      <PageHero crumb="Industries" title="From plant to port, across industries." lead="Each sector works to its own codes. We work to them too." />
       <section className="py-16 md:py-24">
         <div className="container-x">
           <ul className="grid gap-4 md:grid-cols-2">

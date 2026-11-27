@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "About", description: "TUV Thuringen 
 export default function AboutPage() {
   return (
     <>
-      <PageHero crumb="About" title="A TÜV Thüringen company in India." lead="TUV Thuringen SouthAsia brings the inspection, survey, certification and testing work of the TÜV Thüringen Group to clients in India and to their projects worldwide." />
+      <PageHero crumb="About" title="A TÜV Thüringen company in India." lead="TUV Thuringen SouthAsia brings the inspection, survey, certification and testing work of the TÜV Thüringen Group to clients and their projects worldwide." />
       <section className="py-16 md:py-24">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
@@ -21,8 +21,8 @@ export default function AboutPage() {
               than 150 accreditations and approvals, including EU notified-body status as Notified Body 0090.
             </p>
             <p className="mt-4 text-[1.0625rem] leading-relaxed text-muted">
-              TUV Thuringen SouthAsia was incorporated in Navi Mumbai on {company.incorporated}. Clients contract with one
-              company, receive one report format and deal with one point of contact, wherever the work takes place.
+              TUV Thuringen SouthAsia was incorporated in Navi Mumbai as a hub for technical consultancy services. Clients
+              contract with one company and deal with one point of contact, wherever the work takes place.
             </p>
             <dl className="mt-10 grid grid-cols-2 gap-6">
               {[["1990", "TÜV Thüringen founded"], ["1,100+", "Experts in the group"], ["150+", "Accreditations and approvals"], ["NB 0090", "EU notified body"]].map(([k, v]) => (
